@@ -2,21 +2,21 @@
   "name": "mabel",
   "version": "0.1.0",
   "description": "SDK for IBM DX",
-  "main": "dist/core.js",
-  "typings": "dist/core.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/base22/mabel-core.git"
+    "url": "git+https://github.com/base22/mabel.git"
   },
   "author": "MiguelAraCo <miguel.aragon@base22.com>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/base22/mabel-core/issues"
+    "url": "https://github.com/base22/mabel/issues"
   },
-  "homepage": "https://github.com/base22/mabel-core#readme",
+  "homepage": "https://github.com/base22/mabel#readme",
   "private": true,
   "devDependencies": {
     "del": "^2.2.0",
@@ -31,8 +31,8 @@
     "tslint": "^3.10.2"
   },
   "jspm": {
-    "name": "@mabel/core",
-    "main": "core",
+    "name": "mabel",
+    "main": "index",
     "devDependencies": {
       "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.16"

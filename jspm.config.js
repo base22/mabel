@@ -2,7 +2,7 @@ SystemJS.config({
   paths: {
     "github:": "jspm_packages/github/",
     "npm:": "jspm_packages/npm/",
-    "@mabel/core/": "src/"
+    "mabel/": "src/"
   },
   browserConfig: {
     "baseURL": "/"
@@ -27,8 +27,8 @@ SystemJS.config({
   },
   transpiler: "plugin-typescript",
   packages: {
-    "@mabel/core": {
-      "main": "core",
+    "mabel": {
+      "main": "index",
       "format": "esm",
       "defaultExtension": "ts"
     }
