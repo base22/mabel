@@ -5,7 +5,7 @@ SystemJS.config({
     "mabel/": "src/"
   },
   browserConfig: {
-    "baseURL": "/"
+    "baseURL": "/base"
   },
   devConfig: {
     "map": {

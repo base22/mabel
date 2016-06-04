@@ -12,5 +12,6 @@
     <orderEntry type="library" name="gulp-tslint-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="gulp-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="gulp-util-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="ts-external-references" level="project" />
   </component>
 </module>

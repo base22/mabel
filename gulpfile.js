@@ -16,6 +16,9 @@ const tslint = require( "gulp-tslint" );
 
 const Builder = require( "jspm" ).Builder;
 
+const karma = require( "karma" );
+const jasmine = require( "gulp-jasmine" );
+
 const config = {
 	dist: {
 		all: "dist/**/*",
@@ -25,13 +28,19 @@ const config = {
 		sfxBundle: "dist/bundles/core.sfx.js"
 	},
 	src: {
+		all: [
+			"typings/typings.d.ts",
+			"src/**/*.ts"
+		],
 		dir: "src",
+		test: "/**/*.spec.js",
 		typescript: [
 			"typings/typings.d.ts",
 			"src/**/*.ts",
 			"!src/**/*.spec.ts"
 		]
-	}
+	},
+	temp: "temp"
 };
 
 gulp.task( "build", ( done ) => {
@@ -81,13 +90,13 @@ gulp.task( "build:sfx", ( done ) => {
 		"sourceMaps": "inline",
 		"mangle": false,
 		"lowResSourceMaps": false,
-	}).then( () => {
+	} ).then( () => {
 		done();
-	}).catch( ( error ) => {
+	} ).catch( ( error ) => {
 		util.log( error );
 		done( error );
-	});
-});
+	} );
+} );
 
 gulp.task( "compile:typescript", () => {
 	let tsProject = ts.createProject( "tsconfig.json", {
@@ -110,6 +119,10 @@ gulp.task( "clean:dist", ( done ) => {
 	return del( config.dist.all, done );
 } );
 
+gulp.task( "clean:temp", ( done ) => {
+	return del( config.temp, done );
+} );
+
 gulp.task( "default", [ "build" ] );
 
 gulp.task( "lint", [ "lint:typescript" ] );
@@ -121,4 +134,35 @@ gulp.task( "lint:typescript", () => {
 		} ) )
 		.pipe( tslint.report( "prose" ) )
 		;
+} );
+
+gulp.task( "test", [ "test:browser", "test:node" ] );
+
+gulp.task( "test:browser", ( done ) => {
+	new karma.Server( {
+		configFile: __dirname + "/karma.conf.js",
+		singleRun: true
+	}, done ).start();
+} );
+
+gulp.task( "test:node", ( done ) => {
+	runSequence(
+		"test:node:exec",
+		"clean:temp",
+		done
+	);
+} );
+
+gulp.task( "test:node:compile", [ "clean:temp" ], () => {
+	let tsProject = ts.createProject( "tsconfig.json" );
+	let tsResults = gulp.src( config.src.all )
+		.pipe( ts( tsProject ) );
+
+	return tsResults.js
+		.pipe( gulp.dest( config.temp ) );
+} );
+
+gulp.task( "test:node:exec", [ "test:node:compile" ], () => {
+	return gulp.src( config.temp + config.src.test )
+		.pipe( jasmine() );
 } );
