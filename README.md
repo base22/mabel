@@ -1,5 +1,7 @@
 # Mabel
 
+[![Build Status](https://travis-ci.org/base22/mabel.svg?branch=master)](https://travis-ci.org/base22/mabel)
+
 SDK for IBM DX.
 
 ## Development
