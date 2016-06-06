@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = ( config ) => {
 	let configuration = {
 		frameworks: [ "jspm", "jasmine" ],
